@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Signature Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4; /* Light grey background for better contrast */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto; /* Center align the container */
+            background: #fff; /* White background for the form container */
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .signature-pad {
+            border: 1px solid #000;
+            width: 100%;
+            height: 100px; /* Reduced height for the signature pad */
+            box-sizing: border-box;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+        .checkbox-group label {
+            margin-bottom: 50px;
+            font-weight: normal; /* Normal font weight for checkbox items */
+        }
+        .checkbox-items {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .checkbox-item {
+            width: 50%;
+            margin-bottom: 10px;
+        }
+        .comments-container, .signature-container {
+            display: flex;
+            gap: 20px;
+        }
+        .comments-container div, .signature-container div {
+            flex: 1;
+        }
+
+        .comments-container textarea, .signature-container textarea {
+            width: 100%;
+            height: 100px;
+            box-sizing: border-box;
+        }
+
+        #message {
+            display: none;
+            color: green;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .form-image {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .form-image img {
+            max-width: 50%;
+            height: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .contact-details {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef; /* Light grey background for contact section */
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .contact-details h3 {
+            margin: 0 0 10px;
+            font-weight: bold;
+        }
+        .contact-details p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+
+        <h2>Elevator Service/Breakdown Sheet</h2>
+        <form id="document-form">
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="checkbox-group">
+                <label><strong>Select the services performed (At least one required):</strong></label><br>
+                <input type="checkbox" id="service1" name="services" value="Inspection">
+                <label for="service1">Inspection</label>
+                <input type="checkbox" id="service2" name="services" value="Repair">
+                <label for="service2">Repair</label>
+                <input type="checkbox" id="service3" name="services" value="Maintenance">
+                <label for="service3">Maintenance</label>
+            </div>
+
+            <div class="checkbox-group">
+                <label>Select the inspection/maintenance items:</label>
+                <div class="checkbox-items">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item1" name="items" value="Motor room condition">
+                        <label for="item1">Motor room condition</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item2" name="items" value="Control panel etc.">
+                        <label for="item2">Control panel etc.</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item3" name="items" value="Traction motor">
+                        <label for="item3">Traction motor</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item4" name="items" value="Governor">
+                        <label for="item4">Governor</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item5" name="items" value="Automatic Rescue Device (ARD)">
+                        <label for="item5">Automatic Rescue Device (ARD)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item6" name="items" value="Traveling condition">
+                        <label for="item6">Traveling condition</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item7" name="items" value="Inter-Phone, Bell">
+                        <label for="item7">Inter-Phone, Bell</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item8" name="items" value="Emergency Light">
+                        <label for="item8">Emergency Light</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item9" name="items" value="Fan, Light & Interior">
+                        <label for="item9">Fan, Light & Interior</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item10" name="items" value="Intercom & Buttons">
+                        <label for="item10">Intercom & Buttons</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item11" name="items" value="Car Door & Sill">
+                        <label for="item11">Car Door & Sill</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item12" name="items" value="Safety Edge">
+                        <label for="item12">Safety Edge</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item13" name="items" value="Door Condition">
+                        <label for="item13">Door Condition</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item14" name="items" value="Landing Door & Sill">
+                        <label for="item14">Landing Door & Sill</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item15" name="items" value="Hall Operation Panel (HOP)">
+                        <label for="item15">Hall Operation Panel (HOP)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item16" name="items" value="Cage Top Condition">
+                        <label for="item16">Cage Top Condition</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item17" name="items" value="Door Motor">
+                        <label for="item17">Door Motor</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item18" name="items" value="Guide Shoes">
+                        <label for="item18">Guide Shoes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item19" name="items" value="Oil Pan">
+                        <label for="item19">Oil Pan</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item20" name="items" value="Pit condition">
+                        <label for="item20">Pit condition</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item21" name="items" value="Traveling Cable">
+                        <label for="item21">Traveling Cable</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item22" name="items" value="Traction Machine">
+                        <label for="item22">Traction Machine</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item23" name="items" value="Buffer Condition">
+                        <label for="item23">Buffer Condition</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="item24" name="items" value="Operation without Lubrication">
+                        <label for="item24">Operation without Lubrication</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comments-container">
+                <div>
+                    <label for="client-comments">Client Comments:</label>
+                    <textarea id="client-comments" name="client-comments" placeholder="Enter client comments here..."></textarea>
+                </div>
+                <div>
+                    <label for="technician-comments">Technician Comments:</label>
+                    <textarea id="technician-comments" name="technician-comments" placeholder="Enter technician comments here..."></textarea>
+                </div>
+            </div>
+
+            <div class="signature-container">
+                <div>
+                    <div class="form-group">
+                        <label for="client-name">Client Name:</label>
+                        <input type="text" id="client-name" name="client-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-nic">NIC No:</label>
+                        <input type="text" id="client-nic" name="client-nic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-signature">Client Signature:</label>
+                        <canvas id="client-signature" class="signature-pad"></canvas>
+                        <input type="hidden" id="client-signature-data" name="client-signature" required>
+                        <button type="button" id="clear-client-signature">Clear Client Signature</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="technician-name">Technician Name:</label>
+                        <input type="text" id="technician-name" name="technician-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="technician-nic">NIC No:</label>
+                        <input type="text" id="technician-nic" name="technician-nic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="technician-signature">Technician Signature:</label>
+                        <canvas id="technician-signature" class="signature-pad"></canvas>
+                        <input type="hidden" id="technician-signature-data" name="technician-signature" required>
+                        <button type="button" id="clear-technician-signature">Clear Technician Signature</button>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="message">Form successfully submitted and PDF generated!</div>
+
+        <div class="contact-details">
+            <h3>Contact Details</h3>
+            <p>General Manager - Engineering</p>
+            <p>0777 455 388, 0117 66 99 88</p>
+            <p>info@gssolutions.lk</p>
+            <p>No 80,5th Lane,Nawala Road,Nawala.</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        var clientCanvas = document.getElementById('client-signature');
+        var technicianCanvas = document.getElementById('technician-signature');
+        var clientSignaturePad = new SignaturePad(clientCanvas);
+        var technicianSignaturePad = new SignaturePad(technicianCanvas);
+
+        // Adjust canvas size to ensure it scales correctly
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function resizeCanvas() {
+            var ratio = Math.max(window.devicePixelRatio || 1, 1);
+            clientCanvas.width = clientCanvas.offsetWidth * ratio;
+            clientCanvas.height = clientCanvas.offsetHeight * ratio;
+            clientCanvas.getContext("2d").scale(ratio, ratio);
+            clientSignaturePad.clear(); // Clear the canvas after resizing
+
+            technicianCanvas.width = technicianCanvas.offsetWidth * ratio;
+            technicianCanvas.height = technicianCanvas.offsetHeight * ratio;
+            technicianCanvas.getContext("2d").scale(ratio, ratio);
+            technicianSignaturePad.clear(); // Clear the canvas after resizing
+        }
+
+        document.getElementById('clear-client-signature').addEventListener('click', function () {
+            clientSignaturePad.clear();
+        });
+
+        document.getElementById('clear-technician-signature').addEventListener('click', function () {
+            technicianSignaturePad.clear();
+        });
+
+        document.getElementById('document-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    console.log('Form submission started');
+
+    let servicesSelected = document.querySelectorAll('input[name="services"]:checked');
+    if (servicesSelected.length === 0) {
+        alert('Please select at least one service.');
+        return;
+    }
+
+    if (clientSignaturePad.isEmpty()) {
+        alert('Please provide a client signature.');
+        return;
+    }
+    if (technicianSignaturePad.isEmpty()) {
+        alert('Please provide a technician signature.');
+        return;
+    }
+
+    console.log('Form validation passed');
+
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.text("Date: " + document.getElementById('date').value, 10, 10);
+        doc.text("Name: " + document.getElementById('name').value, 10, 20);
+        doc.text("Email: " + document.getElementById('email').value, 10, 30);
+        doc.text("Client Comments: " + document.getElementById('client-comments').value, 10, 40);
+        doc.text("Technician Comments: " + document.getElementById('technician-comments').value, 10, 50);
+
+        var clientSignatureDataURL = clientSignaturePad.toDataURL();
+        var technicianSignatureDataURL = technicianSignaturePad.toDataURL();
+        doc.addImage(clientSignatureDataURL, 'PNG', 10, 60, 180, 30);
+        doc.addImage(technicianSignatureDataURL, 'PNG', 10, 100, 180, 30);
+
+       
+
+        let services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(el => el.nextElementSibling.textContent).join(', ');
+        doc.text("Services Performed: " + services, 10, 210);
+
+        let items = Array.from(document.querySelectorAll('input[name="items"]:checked')).map(el => el.nextElementSibling.textContent).join(', ');
+        doc.text("Inspection/Maintenance Items: " + items, 10, 220);
+
+        var pdfBlob = doc.output('blob');
+        console.log('PDF Blob created');
+
+        const reader = new FileReader();
+        reader.onloadend = async function () {
+            const pdfBase64 = reader.result.split(',')[1];
+            console.log('PDF Base64 created');
+
+            try {
+                await uploadToGoogleDrive(pdfBlob, "DocumentWithSignatures.pdf");
+                await sendEmailWithPDF(pdfBase64, "DocumentWithSignatures.pdf");
+                document.getElementById('message').style.display = 'block';
+            } catch (error) {
+                console.error('Error during upload or email sending:', error);
+                alert('Failed to submit the form. Please try again.');
+            }
+        };
+        reader.readAsDataURL(pdfBlob);
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+        alert('Failed to generate PDF. Please check your inputs and try again.');
+    }
+});
+
+        async function refreshAccessToken() {
+            refreshToken = '1//04KpKozGZkgVnCgYIARAAGAQSNwF-L9IrlFI2RiUGlEQavLMafZa6GHC44WGIKRHfVLZeJZHv_3TRuiPMvvyKJ1rk1nzktlPzWpY'; // Replace with your actual refresh token
+            clientId = '515981529627-in314q7stikcsvasfkdsk4l3ktslnif6.apps.googleusercontent.com'; // Replace with your client ID
+            clientSecret = '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'; // Replace with your client secret
+
+            const params = new URLSearchParams();
+            params.append('client_id', clientId);
+            params.append('client_secret', clientSecret);
+            params.append('refresh_token', refreshToken);
+            params.append('grant_type', 'refresh_token');
+
+            const response = await fetch('https://oauth2.googleapis.com/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error('Error refreshing access token');
+            }
+
+            return data.access_token;
+        }
+
+        async function uploadToGoogleDrive(fileBlob, fileName) {
+            const accessToken = await refreshAccessToken(); // Refresh the token before making the request
+            const folderId = '13vBo1IdA1l2PYiDb1qdJkltHEARFs991'; // Replace with your specific folder ID in Google Drive
+
+            const metadata = {
+                name: fileName,
+                mimeType: 'application/pdf',
+                parents: [folderId]  // Specify the folder ID here
+            };
+
+            const formData = new FormData();
+            formData.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+            formData.append('file', fileBlob);
+
+            const response = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+                method: 'POST',
+                headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Error uploading file to Google Drive');
+            }
+        }
+
+        async function sendEmailWithPDF(pdfBase64, fileName) {
+            // Implement this function as needed
+        }
+    </script>
+</body>
+</html>
