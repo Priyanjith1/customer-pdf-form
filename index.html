@@ -5,57 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Signature Form</title>
     <style>
-        body {
+      body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f4f4; /* Light grey background for better contrast */
+            background-color: #f4f4f4;
         }
+
+        .header {
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
         .container {
             max-width: 800px;
-            margin: 0 auto; /* Center align the container */
-            background: #fff; /* White background for the form container */
-            padding: 20px;
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .form-group {
             margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
         }
+
         .form-group label {
-            display: block;
             margin-bottom: 5px;
-            font-weight: bold;
         }
+
         .signature-pad {
             border: 1px solid #000;
-            width: 100%;
-            height: 100px; /* Reduced height for the signature pad */
-            box-sizing: border-box;
-        }
-        textarea {
             width: 100%;
             height: 100px;
             box-sizing: border-box;
         }
+
         .checkbox-group {
             margin-bottom: 20px;
         }
-        .checkbox-group label {
-            margin-bottom: 50px;
-            font-weight: normal; /* Normal font weight for checkbox items */
-        }
+
         .checkbox-items {
             display: flex;
             flex-wrap: wrap;
         }
+
         .checkbox-item {
             width: 50%;
             margin-bottom: 10px;
         }
+
         .comments-container, .signature-container {
             display: flex;
             gap: 20px;
         }
+
         .comments-container div, .signature-container div {
             flex: 1;
         }
@@ -72,53 +84,111 @@
             margin-top: 20px;
             font-weight: bold;
         }
+
         .form-image {
             margin-bottom: 15px;
             text-align: center;
         }
+
         .form-image img {
             max-width: 50%;
             height: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .contact-details {
             margin-top: 20px;
             padding: 15px;
-            background: #e9ecef; /* Light grey background for contact section */
+            background: #e9ecef;
             border-radius: 8px;
             border: 1px solid #ccc;
         }
+
         .contact-details h3 {
             margin: 0 0 10px;
             font-weight: bold;
         }
-        .contact-details p {
-            margin: 5px 0;
+
+        .form-date {
+            margin-bottom: 15px;
+            text-align: right;
         }
+
+        .form-group-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .form-group-left,
+        .form-group-right {
+            flex: 1 1 45%;
+            margin-bottom: 15px;
+        }
+
+        .form-group-left input,
+        .form-group-right input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .comments-container {
+            margin-top: 20px;
+        }
+        
+        .comments-container .comment-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comments-container label {
+            margin-bottom: 5px;
+        }
+        
     </style>
 </head>
+
 <body>
     <div class="container">
-       <div class="form-image">
-         <img src="https://raw.githubusercontent.com/Priyanjith1/customer-pdf-form/main/index_new.png" alt="Form Image">
-      </div>
+        <div class="form-image">
+            <img src="https://raw.githubusercontent.com/Priyanjith1/customer-pdf-form/main/index__new.png.png" alt="Form Image">
+         </div>
+    
+         <div class="header">
+            <h1>Elevator Service/Breakdown/Inspection Sheet</h1>
+          </div>
+          
+        
 
-        <h2>Elevator Service/Breakdown Sheet</h2>
         <form id="document-form">
-            <div class="form-group">
-                <label for="date">Date:</label>
+
+            <div class="form-date">
+                <strong><label for="date">Date:</strong></label>
                 <input type="date" id="date" name="date" required>
+    
+               </div>
+    
+               <div class="form-group-container">
+                <div class="form-group-left">
+                    <strong><label for="name">Name of the client/site:</strong></label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group-left">
+                    <strong><label for="email">Email:</strong></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group-right">
+                    <strong><label for="units">No of Units:</strong></label>
+                    <input type="number" id="number" name="units" required>
+                </div>
+                <div class="form-group-right">
+                    <strong><label for="specifications">Specifications:</strong></label>
+                    <input type="text" id="specifications" name="specifications" required> 
+                </div>
             </div>
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+
             <div class="checkbox-group">
-                <label><strong>Select the services performed (At least one required):</strong></label><br>
+                <label><strong>Select the services performed (At least one required):</strong></label><p>
                 <input type="checkbox" id="service1" name="services" value="Inspection">
                 <label for="service1">Inspection</label>
                 <input type="checkbox" id="service2" name="services" value="Repair">
@@ -128,7 +198,7 @@
             </div>
 
             <div class="checkbox-group">
-                <label>Select the inspection/maintenance items:</label>
+                <label><strong>Select the inspection/maintenance items:</strong></label><p>
                 <div class="checkbox-items">
                     <div class="checkbox-item">
                         <input type="checkbox" id="item1" name="items" value="Motor room condition">
@@ -229,48 +299,59 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <strong><label for="Replaced/Repaired item">Replaced/Repaired item:</strong></label>
+                <input type="text" id="Replaced/Repaired item" name="Replaced/Repaired item">
+            </div>
+
+            <div class="form-group">
+                <strong><label for="Serial N0">Serial N0:</strong></label>
+                <input type="text" id="Serial N0" name="Serial N0">
+            </div>
+
             <div class="comments-container">
-                <div>
-                    <label for="client-comments">Client Comments:</label>
-                    <textarea id="client-comments" name="client-comments" placeholder="Enter client comments here..."></textarea>
+                <div class="comment-section">
+                    
+                    <textarea id="client-comment" name="client-comment" placeholder="Client's Comments"></textarea>
+                    <label for="client-comment">I hereby acknowledge that the aforementioned routine was carried out with my full awareness and I am satisfied with the service provided</label>
                 </div>
-                <div>
-                    <label for="technician-comments">Technician Comments:</label>
-                    <textarea id="technician-comments" name="technician-comments" placeholder="Enter technician comments here..."></textarea>
+                <div class="comment-section">
+                    <label for="technician-comment"></label>
+                    <textarea id="technician-comment" name="technician-comment" placeholder="Technician's Comments"></textarea>
                 </div>
             </div>
 
             <div class="signature-container">
                 <div>
                     <div class="form-group">
-                        <label for="client-name">Client Name:</label>
+                        <strong><label for="client-name">Client Name:</strong></label>
                         <input type="text" id="client-name" name="client-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="client-nic">NIC No:</label>
+                        <strong><label for="client-nic">NIC No:</strong></label>
                         <input type="text" id="client-nic" name="client-nic" required>
                     </div>
                     <div class="form-group">
-                        <label for="client-signature">Client Signature:</label>
+                        <strong><label for="client-signature">Client's Signature:</strong></label>
                         <canvas id="client-signature" class="signature-pad"></canvas>
                         <input type="hidden" id="client-signature-data" name="client-signature" required>
-                        <button type="button" id="clear-client-signature">Clear Client Signature</button>
+                        <button type="button" id="clear-client-signature">Clear Signature</button>
                     </div>
                 </div>
                 <div>
                     <div class="form-group">
-                        <label for="technician-name">Technician Name:</label>
+                        <strong><label for="technician-name">Technician Name:</strong></label>
                         <input type="text" id="technician-name" name="technician-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="technician-nic">NIC No:</label>
+                        <strong><label for="technician-nic">NIC No:</strong></label>
                         <input type="text" id="technician-nic" name="technician-nic" required>
                     </div>
                     <div class="form-group">
-                        <label for="technician-signature">Technician Signature:</label>
+                        <strong><label for="technician-signature">Technician's Signature:</strong></label>
                         <canvas id="technician-signature" class="signature-pad"></canvas>
                         <input type="hidden" id="technician-signature-data" name="technician-signature" required>
-                        <button type="button" id="clear-technician-signature">Clear Technician Signature</button>
+                        <button type="button" id="clear-technician-signature">Clear Signature</button>
                     </div>
                 </div>
             </div>
@@ -282,49 +363,60 @@
 
         <div class="contact-details">
             <h3>Contact Details</h3>
-            <p>General Manager - Engineering</p>
-            <p>0777 455 388, 0117 66 99 88</p>
-            <p>info@gssolutions.lk</p>
-            <p>No 80,5th Lane,Nawala Road,Nawala.</p>
+            <p><strong>Phone:                 </strong>+94 (11) 779 2800</p>
+            <p><strong>Emergency No:</strong> +94 (77) 925 9970</p>
+            <p><strong>Email:</strong>        info@gssolutions.lk</p>
+            <p><strong>Address:</strong>      12 Don Carolis Rd, Colombo 005</p>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script>
-        var clientCanvas = document.getElementById('client-signature');
-        var technicianCanvas = document.getElementById('technician-signature');
-        var clientSignaturePad = new SignaturePad(clientCanvas);
-        var technicianSignaturePad = new SignaturePad(technicianCanvas);
+    
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+        
+        <script>
+            // Signature pad initialization and event listeners...
+            const clientCanvas = document.getElementById('client-signature');
+            const technicianCanvas = document.getElementById('technician-signature');
+            const clientSignaturePad = new SignaturePad(clientCanvas, {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                penColor: 'black'
+            });
+            const technicianSignaturePad = new SignaturePad(technicianCanvas, {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                penColor: 'black'
+            });
+        
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+        
+            function resizeCanvas() {
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                clientCanvas.width = clientCanvas.offsetWidth * ratio;
+                clientCanvas.height = clientCanvas.offsetHeight * ratio;
+                clientCanvas.getContext("2d").scale(ratio, ratio);
+                clientSignaturePad.clear();
+        
+                technicianCanvas.width = technicianCanvas.offsetWidth * ratio;
+                technicianCanvas.height = technicianCanvas.offsetHeight * ratio;
+                technicianCanvas.getContext("2d").scale(ratio, ratio);
+                technicianSignaturePad.clear();
+            }
+        
+            document.getElementById('clear-client-signature').addEventListener('click', function () {
+                clientSignaturePad.clear();
+            });
+        
+            document.getElementById('clear-technician-signature').addEventListener('click', function () {
+                technicianSignaturePad.clear();
+            });
 
-        // Adjust canvas size to ensure it scales correctly
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        function resizeCanvas() {
-            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-            clientCanvas.width = clientCanvas.offsetWidth * ratio;
-            clientCanvas.height = clientCanvas.offsetHeight * ratio;
-            clientCanvas.getContext("2d").scale(ratio, ratio);
-            clientSignaturePad.clear(); // Clear the canvas after resizing
-
-            technicianCanvas.width = technicianCanvas.offsetWidth * ratio;
-            technicianCanvas.height = technicianCanvas.offsetHeight * ratio;
-            technicianCanvas.getContext("2d").scale(ratio, ratio);
-            technicianSignaturePad.clear(); // Clear the canvas after resizing
-        }
-
-        document.getElementById('clear-client-signature').addEventListener('click', function () {
-            clientSignaturePad.clear();
-        });
-
-        document.getElementById('clear-technician-signature').addEventListener('click', function () {
-            technicianSignaturePad.clear();
-        });
-
-        document.getElementById('document-form').addEventListener('submit', async function (event) {
+        
+            document.getElementById('document-form').addEventListener('submit', async function (event) {
     event.preventDefault();
+    console.log('Form submission started.');
 
-    console.log('Form submission started');
+    // Show the "Please wait" message
+    alert('Please wait PDF is submitting.');
 
     let servicesSelected = document.querySelectorAll('input[name="services"]:checked');
     if (servicesSelected.length === 0) {
@@ -332,52 +424,109 @@
         return;
     }
 
-    if (clientSignaturePad.isEmpty()) {
-        alert('Please provide a client signature.');
-        return;
-    }
-    if (technicianSignaturePad.isEmpty()) {
-        alert('Please provide a technician signature.');
+
+    if (clientSignaturePad.isEmpty() || technicianSignaturePad.isEmpty()) {
+        alert('Please provide signatures.');
         return;
     }
 
-    console.log('Form validation passed');
+   
+
+    // Get the email address from the form
+    const email = document.getElementById('email').value;
+
+
+    document.getElementById('client-signature-data').value = clientSignaturePad.toDataURL();
+    document.getElementById('technician-signature-data').value = technicianSignaturePad.toDataURL();
+    const name = document.getElementById('name').value.trim(); // Ensure to get the value
+    const date = document.getElementById('date').value.trim(); // Ensure to get the value
 
     try {
+        const formElement = document.querySelector('.container');
+
+        console.log('Starting image load check.');
+
+        // Ensure all images are loaded
+        await new Promise((resolve, reject) => {
+    const img = formElement.querySelector('img');
+    let imageLoadTimeout;
+
+    if (!img) {
+        console.log('No image found in the form, proceeding.');
+        resolve();
+        return;
+    }
+
+    // Set a timeout to ensure we don't wait indefinitely
+    imageLoadTimeout = setTimeout(() => {
+        console.warn('Image loading timed out. Proceeding with PDF generation.');
+        resolve();
+    }, 10000); // 5 seconds timeout
+
+    if (img.complete) {
+        console.log(`Image already loaded: ${img.src}`);
+        clearTimeout(imageLoadTimeout);
+        resolve();
+    } else {
+        img.onload = () => {
+            console.log(`Image loaded successfully: ${img.src}`);
+            clearTimeout(imageLoadTimeout);
+            resolve();
+        };
+        img.onerror = () => {
+            console.error(`Error loading image: ${img.src}`);
+            clearTimeout(imageLoadTimeout);
+            resolve(); // Proceed even if the image fails to load
+        };
+    }
+});
+
+
+        console.log('Generating canvas.');
+        const canvas = await html2canvas(formElement, { scale: 2 });
+        const imgData = canvas.toDataURL('image/png');
+
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+        const pdf = new jsPDF('p', 'mm', [216, 450]);
 
-        doc.text("Date: " + document.getElementById('date').value, 10, 10);
-        doc.text("Name: " + document.getElementById('name').value, 10, 20);
-        doc.text("Email: " + document.getElementById('email').value, 10, 30);
-        doc.text("Client Comments: " + document.getElementById('client-comments').value, 10, 40);
-        doc.text("Technician Comments: " + document.getElementById('technician-comments').value, 10, 50);
+         // Set metadata with the email
+        pdf.setProperties({
+        title: 'Elevator Service/Breakdown/Inspection Sheet',
+        subject: 'Service Form PDF',
+        author: 'George Steuart Solutions (PVT) Ltd',
+        keywords: 'Elevator, Service, Breakdown, PDF',
+        creator: 'Priyanjith Bandara',
+        pv:       '6957',
 
-        var clientSignatureDataURL = clientSignaturePad.toDataURL();
-        var technicianSignatureDataURL = technicianSignaturePad.toDataURL();
-        doc.addImage(clientSignatureDataURL, 'PNG', 10, 60, 180, 30);
-        doc.addImage(technicianSignatureDataURL, 'PNG', 10, 100, 180, 30);
+       });
 
-       
 
-        let services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(el => el.nextElementSibling.textContent).join(', ');
-        doc.text("Services Performed: " + services, 10, 210);
+        // Add custom metadata using XMP format
+        const customMetadata = `
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <email>${email}</email>
+            </rdf:Description>
+        `;
+        pdf.addMetadata(customMetadata);
 
-        let items = Array.from(document.querySelectorAll('input[name="items"]:checked')).map(el => el.nextElementSibling.textContent).join(', ');
-        doc.text("Inspection/Maintenance Items: " + items, 10, 220);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-        var pdfBlob = doc.output('blob');
-        console.log('PDF Blob created');
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
+
+        const pdfBlob = pdf.output('blob');
+
+        const fileName = `${name}_${date}.pdf`;
 
         const reader = new FileReader();
         reader.onloadend = async function () {
+            console.log('PDF conversion to Base64 completed.');
             const pdfBase64 = reader.result.split(',')[1];
-            console.log('PDF Base64 created');
 
             try {
-                await uploadToGoogleDrive(pdfBlob, "DocumentWithSignatures.pdf");
-                await sendEmailWithPDF(pdfBase64, "DocumentWithSignatures.pdf");
+                await uploadToGoogleDrive(pdfBlob, fileName);
                 document.getElementById('message').style.display = 'block';
+                console.log('File uploaded successfully.');
             } catch (error) {
                 console.error('Error during upload or email sending:', error);
                 alert('Failed to submit the form. Please try again.');
@@ -386,63 +535,61 @@
         reader.readAsDataURL(pdfBlob);
     } catch (error) {
         console.error('Error generating PDF:', error);
-        alert('Failed to generate PDF. Please check your inputs and try again.');
+        alert('Failed to generate PDF. Please try again.');
     }
 });
-
+    
         async function refreshAccessToken() {
-            refreshToken = '1//04KpKozGZkgVnCgYIARAAGAQSNwF-L9IrlFI2RiUGlEQavLMafZa6GHC44WGIKRHfVLZeJZHv_3TRuiPMvvyKJ1rk1nzktlPzWpY'; // Replace with your actual refresh token
-            clientId = '515981529627-in314q7stikcsvasfkdsk4l3ktslnif6.apps.googleusercontent.com'; // Replace with your client ID
-            clientSecret = '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'; // Replace with your client secret
-
+            refreshToken = '1//04KpKozGZkgVnCgYIARAAGAQSNwF-L9IrlFI2RiUGlEQavLMafZa6GHC44WGIKRHfVLZeJZHv_3TRuiPMvvyKJ1rk1nzktlPzWpY';
+            clientId = '515981529627-in314q7stikcsvasfkdsk4l3ktslnif6.apps.googleusercontent.com';
+            clientSecret = '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';
+    
             const params = new URLSearchParams();
             params.append('client_id', clientId);
             params.append('client_secret', clientSecret);
             params.append('refresh_token', refreshToken);
             params.append('grant_type', 'refresh_token');
-
+    
             const response = await fetch('https://oauth2.googleapis.com/token', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params
             });
-
+    
             const data = await response.json();
             if (!response.ok) {
                 throw new Error('Error refreshing access token');
             }
-
+    
             return data.access_token;
         }
-
+    
         async function uploadToGoogleDrive(fileBlob, fileName) {
-            const accessToken = await refreshAccessToken(); // Refresh the token before making the request
-            const folderId = '13vBo1IdA1l2PYiDb1qdJkltHEARFs991'; // Replace with your specific folder ID in Google Drive
-
+            const accessToken = await refreshAccessToken();
+            const folderId = '13vBo1IdA1l2PYiDb1qdJkltHEARFs991';
+    
             const metadata = {
                 name: fileName,
                 mimeType: 'application/pdf',
-                parents: [folderId]  // Specify the folder ID here
+                parents: [folderId]
             };
-
+    
             const formData = new FormData();
             formData.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
             formData.append('file', fileBlob);
-
+    
             const response = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
                 method: 'POST',
                 headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
                 body: formData
             });
-
+    
             if (!response.ok) {
                 throw new Error('Error uploading file to Google Drive');
             }
         }
-
-        async function sendEmailWithPDF(pdfBase64, fileName) {
-            // Implement this function as needed
-        }
+    
     </script>
+    
 </body>
 </html>
