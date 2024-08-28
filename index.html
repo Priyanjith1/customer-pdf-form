@@ -104,6 +104,15 @@
     box-sizing: border-box;
 }
 
+#loading-message {
+            display: none; /* Hide initially */
+            color: blue;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center; /* Center align the message */
+        }
+
+
 #message {
     display: none;
     color: green;
@@ -369,6 +378,8 @@
             <button type="submit">Submit</button>
         </form>
 
+        <div id="loading-message">Please wait, the form is submitting...</div>
+
         <div id="message">Form successfully submitted and PDF generated!</div>
 
         <div class="contact-details">
@@ -425,18 +436,22 @@
     event.preventDefault();
     console.log('Form submission started.');
 
-    // Show the "Please wait" message
-    alert('Please wait PDF is submitting.');
+    document.getElementById('loading-message').style.display = 'block';
+
 
     let servicesSelected = document.querySelectorAll('input[name="services"]:checked');
     if (servicesSelected.length === 0) {
         alert('Please select at least one service.');
+
+        document.getElementById('loading-message').style.display = 'none';
         return;
     }
 
 
     if (clientSignaturePad.isEmpty() || technicianSignaturePad.isEmpty()) {
         alert('Please provide signatures.');
+
+        document.getElementById('loading-message').style.display = 'none';
         return;
     }
 
@@ -490,7 +505,7 @@
         };
     }
 });
-
+      document.getElementById('loading-message').style.display = 'none';
 
         console.log('Generating canvas.');
         const canvas = await html2canvas(formElement, {
@@ -504,7 +519,8 @@
     width: formElement.scrollWidth, // Use scrollWidth to capture full content width
     height: formElement.scrollHeight, // Use scrollHeight to capture full content height
 });
-
+             
+document.getElementById('loading-message').style.display = 'block';
 
                 const imgData = canvas.toDataURL('image/png',0.5);
                 const { jsPDF } = window.jspdf;
@@ -549,10 +565,15 @@
 
                 try {
                     await uploadToGoogleDrive(pdfBlob, fileName);
+
+                    document.getElementById('loading-message').style.display = 'none';
                     document.getElementById('message').style.display = 'block';
                 } catch (error) {
                     console.error('Error uploading PDF to Google Drive:', error);
                     alert('An error occurred while uploading the PDF. Please try again.');
+                    document.getElementById('loading-message').style.display = 'none';
+
+                    document.getElementById('loading-message').style.display = 'none';
                 }
             };
             reader.readAsDataURL(pdfBlob);
@@ -560,6 +581,7 @@
         } catch (error) {
             console.error('Error generating PDF:', error);
             alert('An error occurred while generating the PDF. Please try again.');
+            document.getElementById('loading-message').style.display = 'none';
         }
     });
     
