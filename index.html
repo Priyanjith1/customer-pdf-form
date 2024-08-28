@@ -5,145 +5,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Signature Form</title>
     <style>
-      body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
 
-        .header {
-            text-align: center;
-            margin: 0 auto;
-            width: 100%;
-            margin-bottom: 20px;
-        }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
 
-        .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
+.form-image {
+    margin-bottom: 15px;
+    text-align: center;
+}
 
-        .form-group label {
-            margin-bottom: 5px;
-        }
+.form-image img {
+    max-width: 100%;
+    height: auto;
+}
 
-        .signature-pad {
-            border: 1px solid #000;
-            width: 100%;
-            height: 100px;
-            box-sizing: border-box;
-        }
+.form-group-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
 
-        .checkbox-group {
-            margin-bottom: 20px;
-        }
+.form-group-left,
+.form-group-right {
+    flex: 1 1 48%;
+    margin-bottom: 15px;
+}
 
-        .checkbox-items {
-            display: flex;
-            flex-wrap: wrap;
-        }
+.form-group-left input,
+.form-group-right input {
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        .checkbox-item {
-            width: 50%;
-            margin-bottom: 10px;
-        }
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
 
-        .comments-container, .signature-container {
-            display: flex;
-            gap: 20px;
-        }
+.form-group label {
+    margin-bottom: 5px;
+}
 
-        .comments-container div, .signature-container div {
-            flex: 1;
-        }
+.signature-pad {
+    border: 1px solid #000;
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+}
 
-        .comments-container textarea, .signature-container textarea {
-            width: 100%;
-            height: 100px;
-            box-sizing: border-box;
-        }
+.checkbox-group {
+    margin-bottom: 20px;
+}
 
-        #message {
-            display: none;
-            color: green;
-            margin-top: 20px;
-            font-weight: bold;
-        }
+.checkbox-items {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-        .form-image {
-            margin-bottom: 15px;
-            text-align: center;
-        }
+.checkbox-item {
+    width: 50%;
+    margin-bottom: 10px;
+}
 
-        .form-image img {
-            max-width: 50%;
-            height: auto;
-        }
+.comments-container,
+.signature-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-        .contact-details {
-            margin-top: 20px;
-            padding: 15px;
-            background: #e9ecef;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+.comments-container textarea,
+.signature-container textarea {
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+}
 
-        .contact-details h3 {
-            margin: 0 0 10px;
-            font-weight: bold;
-        }
+#message {
+    display: none;
+    color: green;
+    margin-top: 20px;
+    font-weight: bold;
+}
 
-        .form-date {
-            margin-bottom: 15px;
-            text-align: right;
-        }
+.contact-details {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e9ecef;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
 
-        .form-group-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
+.contact-details h3 {
+    margin: 0 0 10px;
+    font-weight: bold;
+}
 
-        .form-group-left,
-        .form-group-right {
-            flex: 1 1 45%;
-            margin-bottom: 15px;
-        }
+.form-date {
+    margin-bottom: 15px;
+    text-align: right;
+}
 
-        .form-group-left input,
-        .form-group-right input {
-            width: 100%;
-            box-sizing: border-box;
-        }
+@media (max-width: 600px) {
+    .form-group-container {
+        flex-direction: column;
+    }
 
-        .comments-container {
-            margin-top: 20px;
-        }
-        
-        .comments-container .comment-section {
-            display: flex;
-            flex-direction: column;
-        }
+    .form-group-left,
+    .form-group-right {
+        flex: 1 1 100%;
+        margin-bottom: 10px;
+    }
 
-        .comments-container label {
-            margin-bottom: 5px;
-        }
+    .form-date {
+        text-align: left;
+    }
+
+    .checkbox-item {
+        width: 100%;
+    }
+    
+    .comments-container,
+    .signature-container {
+        flex-direction: column;
+    }
+}
+
         
     </style>
 </head>
@@ -483,11 +493,23 @@
 
 
         console.log('Generating canvas.');
-        const canvas = await html2canvas(formElement, { scale: 2 });
-        const imgData = canvas.toDataURL('image/png');
+        const canvas = await html2canvas(formElement, {
+                scale: 2, 
+                useCORS: true, 
+                logging: true, 
+                allowTaint: true,
+                x: 0,
+                y: 0,
+                width: formElement.scrollWidth,
+                height: formElement.scrollHeight,
+            });
 
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', [216, 450]);
+                const imgData = canvas.toDataURL('image/png',0.5);
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', [canvas.width * 0.264583, canvas.height * 0.264583]);
+                pdf.addImage(imgData, 'PNG', 0, 0, canvas.width * 0.264583, canvas.height * 0.264583*0.4);
+
+            
 
          // Set metadata with the email
         pdf.setProperties({
@@ -509,35 +531,35 @@
         `;
         pdf.addMetadata(customMetadata);
 
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        
+            const pdfBlob = pdf.output('blob');
+            const fileName = `${name}_${date}.pdf`;
 
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
+            const reader = new FileReader();
+                reader.onloadend = async function (e) {
+                    const arrayBuffer = e.target.result;
+                    const file = new Blob([arrayBuffer], { type: 'application/pdf' });
 
-        const pdfBlob = pdf.output('blob');
+                    const formData = new FormData();
+                    formData.append('pdf', file, fileName);
 
-        const fileName = `${name}_${date}.pdf`;
+                    console.log('PDF generated and ready for submission.');
 
-        const reader = new FileReader();
-        reader.onloadend = async function () {
-            console.log('PDF conversion to Base64 completed.');
-            const pdfBase64 = reader.result.split(',')[1];
+                try {
+                    await uploadToGoogleDrive(pdfBlob, fileName);
+                    document.getElementById('message').style.display = 'block';
+                } catch (error) {
+                    console.error('Error uploading PDF to Google Drive:', error);
+                    alert('An error occurred while uploading the PDF. Please try again.');
+                }
+            };
+            reader.readAsDataURL(pdfBlob);
 
-            try {
-                await uploadToGoogleDrive(pdfBlob, fileName);
-                document.getElementById('message').style.display = 'block';
-                console.log('File uploaded successfully.');
-            } catch (error) {
-                console.error('Error during upload or email sending:', error);
-                alert('Failed to submit the form. Please try again.');
-            }
-        };
-        reader.readAsDataURL(pdfBlob);
-    } catch (error) {
-        console.error('Error generating PDF:', error);
-        alert('Failed to generate PDF. Please try again.');
-    }
-});
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            alert('An error occurred while generating the PDF. Please try again.');
+        }
+    });
     
         async function refreshAccessToken() {
             refreshToken = '1//04KpKozGZkgVnCgYIARAAGAQSNwF-L9IrlFI2RiUGlEQavLMafZa6GHC44WGIKRHfVLZeJZHv_3TRuiPMvvyKJ1rk1nzktlPzWpY';
