@@ -494,20 +494,22 @@
 
         console.log('Generating canvas.');
         const canvas = await html2canvas(formElement, {
-                scale: 2, 
-                useCORS: true, 
-                logging: true, 
-                allowTaint: true,
-                x: 0,
-                y: 0,
-                width: formElement.scrollWidth,
-                height: formElement.scrollHeight,
-            });
+    scale: window.devicePixelRatio, // Ensure it matches the device pixel ratio for better resolution
+    useCORS: true,
+    logging: true,
+    x: 0,
+    y: 0,
+    scrollX: -window.scrollX, // Compensate for any scrolling
+    scrollY: -window.scrollY, // Compensate for any scrolling
+    width: formElement.scrollWidth, // Use scrollWidth to capture full content width
+    height: formElement.scrollHeight, // Use scrollHeight to capture full content height
+});
 
-                const imgData = canvas.toDataURL('image/png',0.5);
+
+                const imgData = canvas.toDataURL('image/png');
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF('p', 'mm', [canvas.width * 0.264583, canvas.height * 0.264583]);
-                pdf.addImage(imgData, 'PNG', 0, 0, canvas.width * 0.264583, canvas.height * 0.264583*0.4);
+                pdf.addImage(imgData, 'PNG', 0, 0, canvas.width * 0.264583, canvas.height * 0.264583);
 
             
 
