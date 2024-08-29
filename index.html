@@ -406,9 +406,32 @@
                 backgroundColor: 'rgba(255, 255, 255, 0)',
                 penColor: 'black'
             });
+
+            // Prevent default touch events on the canvas to avoid scrolling interference
+               clientCanvas.addEventListener('touchstart', function (event) {
+                event.preventDefault();  // Prevent scrolling when touching the canvas
+              });
+                  technicianCanvas.addEventListener('touchstart', function (event) {
+                  event.preventDefault();  // Prevent scrolling when touching the canvas
+             });
         
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
+
+
+            function disableScroll() {
+            document.body.style.overflow = 'hidden';
+                }
+
+                function enableScroll() {
+                  document.body.style.overflow = 'auto';
+                   }
+
+                clientCanvas.addEventListener('touchstart', disableScroll);
+                clientCanvas.addEventListener('touchend', enableScroll);
+                technicianCanvas.addEventListener('touchstart', disableScroll);
+                technicianCanvas.addEventListener('touchend', enableScroll);
+
         
             function resizeCanvas() {
                 const ratio = Math.max(window.devicePixelRatio || 1, 1);
@@ -422,6 +445,11 @@
                 technicianCanvas.getContext("2d").scale(ratio, ratio);
                 technicianSignaturePad.clear();
             }
+
+
+            // Initialize once and not clear every time resizing occurs
+               window.addEventListener('resize', resizeCanvas);
+               resizeCanvas();
         
             document.getElementById('clear-client-signature').addEventListener('click', function () {
                 clientSignaturePad.clear();
