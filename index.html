@@ -415,22 +415,38 @@
                   event.preventDefault();  // Prevent scrolling when touching the canvas
              });
         
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
+             function saveSignatureData() {
+                // Save signature data to restore after resizing
+                return {
+                    client: clientSignaturePad.toDataURL(),
+                    technician: technicianSignaturePad.toDataURL()
+                };
+            }
 
-
-            function disableScroll() {
-            document.body.style.overflow = 'hidden';
+            function restoreSignatureData(data) {
+                // Restore signature data after resizing
+                if (data.client) {
+                    const clientImage = new Image();
+                    clientImage.onload = function () {
+                        clientCanvas.getContext("2d").drawImage(clientImage, 0, 0);
+                    };
+                    clientImage.src = data.client;
                 }
 
-                function enableScroll() {
-                  document.body.style.overflow = 'auto';
-                   }
+                if (data.technician) {
+                    const technicianImage = new Image();
+                    technicianImage.onload = function () {
+                        technicianCanvas.getContext("2d").drawImage(technicianImage, 0, 0);
+                    };
+                    technicianImage.src = data.technician;
+                }
+            }
 
-                clientCanvas.addEventListener('touchstart', disableScroll);
-                clientCanvas.addEventListener('touchend', enableScroll);
-                technicianCanvas.addEventListener('touchstart', disableScroll);
-                technicianCanvas.addEventListener('touchend', enableScroll);
+            window.addEventListener('resize', function () {
+                const savedData = saveSignatureData();
+                resizeCanvas();
+                restoreSignatureData(savedData);
+            });
 
         
             function resizeCanvas() {
