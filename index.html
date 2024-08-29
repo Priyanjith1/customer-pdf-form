@@ -406,16 +406,21 @@
                 backgroundColor: 'rgba(255, 255, 255, 0)',
                 penColor: 'black'
             });
-
+            
             // Prevent default touch events on the canvas to avoid scrolling interference
-               clientCanvas.addEventListener('touchstart', function (event) {
-                event.preventDefault();  // Prevent scrolling when touching the canvas
-              });
-                  technicianCanvas.addEventListener('touchstart', function (event) {
-                  event.preventDefault();  // Prevent scrolling when touching the canvas
-             });
-        
-             function saveSignatureData() {
+            function preventDefaultTouch(e) {
+                e.preventDefault();
+            }
+
+            clientCanvas.addEventListener('touchstart', preventDefaultTouch);
+            clientCanvas.addEventListener('touchmove', preventDefaultTouch);
+            clientCanvas.addEventListener('touchend', preventDefaultTouch);
+
+            technicianCanvas.addEventListener('touchstart', preventDefaultTouch);
+            technicianCanvas.addEventListener('touchmove', preventDefaultTouch);
+            technicianCanvas.addEventListener('touchend', preventDefaultTouch);
+
+            function saveSignatureData() {
                 // Save signature data to restore after resizing
                 return {
                     client: clientSignaturePad.toDataURL(),
@@ -442,12 +447,22 @@
                 }
             }
 
-            window.addEventListener('resize', function () {
+            function debounce(func, wait) {
+                let timeout;
+                return function () {
+                    const context = this, args = arguments;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), wait);
+                };
+            }
+
+            const resizeHandler = debounce(function () {
                 const savedData = saveSignatureData();
                 resizeCanvas();
                 restoreSignatureData(savedData);
-            });
+            }, 300);
 
+            window.addEventListener('resize', resizeHandler);
         
             function resizeCanvas() {
                 const ratio = Math.max(window.devicePixelRatio || 1, 1);
