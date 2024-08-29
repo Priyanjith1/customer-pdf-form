@@ -74,6 +74,7 @@
     width: 100%;
     height: 150px;
     box-sizing: border-box;
+    touch-action: none;
 }
 
 .checkbox-group {
@@ -406,82 +407,67 @@
                 backgroundColor: 'rgba(255, 255, 255, 0)',
                 penColor: 'black'
             });
-            
-            // Prevent default touch events on the canvas to avoid scrolling interference
-            function preventDefaultTouch(e) {
-                e.preventDefault();
+
+
+                  // Prevent page scrolling when drawing on canvas
+            function disableScroll() {
+                document.body.style.overflow = 'hidden';
             }
 
-            clientCanvas.addEventListener('touchstart', preventDefaultTouch);
-            clientCanvas.addEventListener('touchmove', preventDefaultTouch);
-            clientCanvas.addEventListener('touchend', preventDefaultTouch);
-
-            technicianCanvas.addEventListener('touchstart', preventDefaultTouch);
-            technicianCanvas.addEventListener('touchmove', preventDefaultTouch);
-            technicianCanvas.addEventListener('touchend', preventDefaultTouch);
-
-            function saveSignatureData() {
-                // Save signature data to restore after resizing
-                return {
-                    client: clientSignaturePad.toDataURL(),
-                    technician: technicianSignaturePad.toDataURL()
-                };
+            function enableScroll() {
+                document.body.style.overflow = 'auto';
             }
 
-            function restoreSignatureData(data) {
-                // Restore signature data after resizing
-                if (data.client) {
-                    const clientImage = new Image();
-                    clientImage.onload = function () {
-                        clientCanvas.getContext("2d").drawImage(clientImage, 0, 0);
-                    };
-                    clientImage.src = data.client;
-                }
+            clientCanvas.addEventListener('touchstart', function (event) {
+                event.preventDefault();
+                disableScroll();
+            });
 
-                if (data.technician) {
-                    const technicianImage = new Image();
-                    technicianImage.onload = function () {
-                        technicianCanvas.getContext("2d").drawImage(technicianImage, 0, 0);
-                    };
-                    technicianImage.src = data.technician;
-                }
-            }
+            clientCanvas.addEventListener('touchend', function (event) {
+                event.preventDefault();
+                enableScroll();
+            });
 
-            function debounce(func, wait) {
-                let timeout;
-                return function () {
-                    const context = this, args = arguments;
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => func.apply(context, args), wait);
-                };
-            }
+            technicianCanvas.addEventListener('touchstart', function (event) {
+                event.preventDefault();
+                disableScroll();
+            });
 
-            const resizeHandler = debounce(function () {
-                const savedData = saveSignatureData();
-                resizeCanvas();
-                restoreSignatureData(savedData);
-            }, 300);
+            technicianCanvas.addEventListener('touchend', function (event) {
+                event.preventDefault();
+                enableScroll();
+            });
 
-            window.addEventListener('resize', resizeHandler);
-        
+            clientCanvas.addEventListener('touchmove', function(event) {
+                event.preventDefault();
+            }, { passive: false });
+
+            technicianCanvas.addEventListener('touchmove', function(event) {
+                event.preventDefault();
+            }, { passive: false });
+
             function resizeCanvas() {
                 const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                
+                // Save the signature data before resizing
+                const clientSignatureData = clientSignaturePad.toData();
+                const technicianSignatureData = technicianSignaturePad.toData();
+                
                 clientCanvas.width = clientCanvas.offsetWidth * ratio;
                 clientCanvas.height = clientCanvas.offsetHeight * ratio;
                 clientCanvas.getContext("2d").scale(ratio, ratio);
-                clientSignaturePad.clear();
-        
+                
                 technicianCanvas.width = technicianCanvas.offsetWidth * ratio;
                 technicianCanvas.height = technicianCanvas.offsetHeight * ratio;
                 technicianCanvas.getContext("2d").scale(ratio, ratio);
-                technicianSignaturePad.clear();
+
+                // Restore the signature data after resizing
+                clientSignaturePad.fromData(clientSignatureData);
+                technicianSignaturePad.fromData(technicianSignatureData);
             }
 
-
-            // Initialize once and not clear every time resizing occurs
-               window.addEventListener('resize', resizeCanvas);
-               resizeCanvas();
-        
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
             document.getElementById('clear-client-signature').addEventListener('click', function () {
                 clientSignaturePad.clear();
             });
